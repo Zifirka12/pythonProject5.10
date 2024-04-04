@@ -1,17 +1,35 @@
-import datetime
+from datetime import datetime
 
-def format_date(input_date):
-    date_obj = datetime.datetime.strptime(input_date, "%Y-%m-%dT%H:%M:%S.%f")
-    return date_obj.strftime("%d.%m.%Y")
 
-def mask_card1(card_number: str) -> str:
-    if len(card_number) == 16:  # Проверяем длину номера карты
-        masked_card1 = card_number[:4] + ' ' + card_number[4:6] + '** **** ' + card_number[-4:]
-        return masked_card1
-    return "Некорректный номер карты"
+def mask_card_number(card_number):
+    return card_number[:7] + ' **** ' + card_number[-4:]
 
-def mask_account1(account_number: str) -> str:
-    if len(account_number) > 4:  # Проверяем, что номер счета хотя бы 4 символа
-        masked_account1 = '**' + account_number[-4:]
-        return masked_account1
-    return "Некорректный номер счета"
+
+def mask_account_number(account_number):
+    return '**' + account_number[-4:]
+
+
+def mask_number(input_str):
+    split_str = input_str.split()
+    if split_str[0] in ['Visa', 'MasterCard', 'Maestro']:
+        return ' '.join([split_str[0], mask_card_number(''.join(split_str[1]))])
+    elif split_str[0] == 'Счет':
+        return 'Счет ' + mask_account_number(split_str[1])
+
+
+def convert_date_format(input_str):
+    input_date = datetime.strptime(input_str, "%Y-%m-%dT%H:%M:%S.%f")
+    return input_date.strftime("%d.%m.%Y")
+
+
+# Пример использования
+card_number = input("Введите номер карты: ")
+masked_card = mask_number(card_number)
+print(masked_card)  # Выведет маскированный номер карты
+
+account_number = input("Введите номер счета: ")
+masked_account = mask_number(account_number)
+print(masked_account)  # Выведет маскированный номер счета
+
+date_str = input("Введите дату: ")  # "2018-07-11T02:26:18.671407"
+print(convert_date_format(date_str))  # 11.07.2018
