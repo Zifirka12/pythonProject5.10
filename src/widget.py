@@ -1,35 +1,26 @@
 from datetime import datetime
 
-
-def mask_card_number(card_number):
-    return card_number[:7] + ' **** ' + card_number[-4:]
+from src.masks import mask_account, mask_card
 
 
-def mask_account_number(account_number):
-    return '**' + account_number[-4:]
-
-
-def mask_number(input_str):
+def mask_number(input_str: str) -> str:
+    """
+    Принимает на вход строку с информацией — тип карты/счета и номер карты/счета.
+    Возвращает исходную строку с замаскированным номером карты/счета.
+    """
     split_str = input_str.split()
-    if split_str[0] in ['Visa', 'MasterCard', 'Maestro']:
-        return ' '.join([split_str[0], mask_card_number(''.join(split_str[1]))])
-    elif split_str[0] == 'Счет':
-        return 'Счет ' + mask_account_number(split_str[1])
+    if split_str[0] in ["Visa", "MasterCard", "Maestro"]:
+        return " ".join([*filter(str.isalpha, split_str), mask_card("".join([i for i in split_str if i.isdigit()]))])
+    elif split_str[0] == "Счет":
+        return "Счет " + mask_account(split_str[1])
+    else:
+        return input_str
 
 
-def convert_date_format(input_str):
+def convert_date_format(input_str: str) -> str:
+    """
+    Функция, которая принимает на вход строку вида 2018-07-11T02:26:18.671407
+    и возвращает строку с датой.
+    """
     input_date = datetime.strptime(input_str, "%Y-%m-%dT%H:%M:%S.%f")
     return input_date.strftime("%d.%m.%Y")
-
-
-# Пример использования
-card_number = input("Введите номер карты: ")
-masked_card = mask_number(card_number)
-print(masked_card)  # Выведет маскированный номер карты
-
-account_number = input("Введите номер счета: ")
-masked_account = mask_number(account_number)
-print(masked_account)  # Выведет маскированный номер счета
-
-date_str = input("Введите дату: ")  # "2018-07-11T02:26:18.671407"
-print(convert_date_format(date_str))  # 11.07.2018
