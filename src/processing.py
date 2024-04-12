@@ -1,8 +1,8 @@
 from datetime import datetime
-from typing import List
+from typing import List, Dict
 
 
-def sort_by_date(list_of_dicts: List[dict], order: str = "descending") -> List[dict]:
+def sort_by_date(list_of_dicts: List[Dict], order: str = "descending") -> List[Dict]:
     reverse = order == "descending"
     """
         Сортирует список словарей по ключу 'date' в порядке возрастания или убывания.
@@ -13,7 +13,7 @@ def sort_by_date(list_of_dicts: List[dict], order: str = "descending") -> List[d
 
         Возвращает:
         - Отсортированный список словарей по ключу 'date'.
-        """
+    """
     return sorted(list_of_dicts, key=lambda x: datetime.fromisoformat(x["date"]), reverse=reverse)
 
 
@@ -30,7 +30,7 @@ output_descending = sort_by_date(input_data, "descending")
 print(output_descending)
 
 
-def filter_by_state(list_of_dicts: List[dict], state: str = "EXECUTED") -> List[dict]:
+def filter_by_state(list_of_dicts: List[Dict], state: str = "EXECUTED") -> List[Dict]:
     """
     Фильтрует список словарей по ключу 'state'.
 
