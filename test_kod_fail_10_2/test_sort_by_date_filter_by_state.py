@@ -1,7 +1,7 @@
 from datetime import datetime
-from typing import List, Dict
+from typing import List
 
-def sort_by_date(list_of_dicts: List[Dict], order: str = "descending") -> List[Dict]:
+def sort_by_date(list_of_dicts: List[dict], order: str = "descending") -> List[dict]:
     reverse = order == "descending"
     return sorted(list_of_dicts, key=lambda x: datetime.fromisoformat(x["date"]), reverse=reverse)
 
@@ -14,7 +14,7 @@ input_data_sort = [
 ]
 
 # Проверка функции filter_by_state()
-def filter_by_state(list_of_dicts: List[Dict], state: str = "EXECUTED") -> List[Dict]:
+def filter_by_state(list_of_dicts: List[dict], state: str = "EXECUTED") -> List[dict]:
     return [item for item in list_of_dicts if item.get("state") == state]
 
 input_data_filter = [
