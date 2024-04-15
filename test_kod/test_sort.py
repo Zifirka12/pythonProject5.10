@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from typing import List
 
 def sort_by_date(list_of_dicts: List[dict], order: str = "descending") -> List[dict]:
