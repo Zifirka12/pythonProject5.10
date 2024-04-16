@@ -1,16 +1,29 @@
 from datetime import datetime
 from src.widget import mask_number, convert_date_format
+import pytest
 
 """
 # Проверка функции mask_number()
 """
 
 
-def test_mask_number() -> str:
-    assert mask_number("Visa 1234567890123456") == "Visa 1234 56** **** 3456"
-    assert mask_number("Maestro 9876543210987654") == "Maestro 9876 54** **** 7654"
-    assert mask_number("Счет 73654108430135874305") == "Счет **4305"
-    assert mask_number("Some_Text_123456") == "Some_Text_123456"
+import pytest
+
+@pytest.mark.parametrize(
+    "input_number, expected_output",
+    [
+        ("Visa 1234567890123456", "Visa 1234 56** **** 3456"),
+        ("Maestro 9876543210987654", "Maestro 9876 54** **** 7654"),
+        ("Счет 73654108430135874305", "Счет **4305"),
+        ("Some_Text_123456", "Some_Text_123456")
+    ]
+)
+def test_mask_number(input_number: str, expected_output: str) -> None:
+    assert mask_number(input_number) == expected_output
+    assert mask_number(input_number) == expected_output
+    assert mask_number(input_number) == expected_output
+    assert mask_number(input_number) == expected_output
+
 
 
 """
