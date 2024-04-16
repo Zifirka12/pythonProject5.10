@@ -7,8 +7,6 @@ import pytest
 """
 
 
-import pytest
-
 @pytest.mark.parametrize(
     "input_number, expected_output",
     [
@@ -25,12 +23,11 @@ def test_mask_number(input_number: str, expected_output: str) -> None:
     assert mask_number(input_number) == expected_output
 
 
-
 """
 # Проверка функции convert_date_format()
 """
 
 
-def test_convert_date_format() -> str:
+def test_convert_date_format() -> None:
     assert convert_date_format("2018-07-11T02:26:18.671407") == "11.07.2018"
     assert convert_date_format("2023-12-31T23:59:59.999999") == "31.12.2023"

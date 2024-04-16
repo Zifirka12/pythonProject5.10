@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List, Dict
 
 
 def sort_by_date(list_of_dicts: List[dict[str, str]], order: str = 'descending') -> List[dict[str, str]]:
@@ -30,7 +30,7 @@ output_descending = sort_by_date(input_data, 'descending')
 print(output_descending)
 
 
-def filter_by_state(list_of_dicts: List[dict[str, str]], state: str = 'EXECUTED') -> List[dict[str, str]]:
+def filter_by_state(list_of_dicts: List[Dict[str, str]], state: str = 'EXECUTED') -> List[Dict[str, str]]:
     """
         Фильтрует список словарей по ключу 'state'.
 
