@@ -22,7 +22,7 @@ def test_filter_by_state_default(input_data_filter: List[dict]) -> None:
 
 
 def test_filter_sort_by_date(input_data_filter: List[dict]) -> None:
-    output_canceled = sort_by_date(input_data_filter, "CANCELED")
+    output_canceled = filter_by_state(input_data_filter, "CANCELED")
     assert output_canceled == [
         {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
         {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"}
