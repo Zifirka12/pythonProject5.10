@@ -1,13 +1,11 @@
-from datetime import datetime
 from src.widget import mask_number, convert_date_format
 import pytest
+
 
 """
 # Проверка функции mask_number()
 """
 
-
-import pytest
 
 @pytest.mark.parametrize(
     "input_number, expected_output",
