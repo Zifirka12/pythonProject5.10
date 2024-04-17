@@ -25,7 +25,6 @@ def test_mask_number(input_number: str, expected_output: str) -> None:
     assert mask_number(input_number) == expected_output
 
 
-
 """
 # Проверка функции convert_date_format()
 """
