@@ -1,4 +1,4 @@
-from typing import List, Generator, Any
+from typing import Any, Generator, List
 
 
 def transaction_descriptions(transactions: List[dict]) -> Generator[str, None, None]:
@@ -22,7 +22,9 @@ for _ in range(5):
     print(next(descriptions))
 
 
-def filter_by_currency(transactions: List[dict], currency: str) -> Generator[Any, None, None]:
+def filter_by_currency(
+    transactions: List[dict], currency: str
+) -> Generator[Any, None, None]:
     for transaction in transactions:
         if (
             transaction.get("operationAmount", {}).get("currency", {}).get("code")
