@@ -1,7 +1,11 @@
+from random import randint
 from typing import Any, Generator, List
 
 
 def transaction_descriptions(transactions: List[dict]) -> Generator[str, None, None]:
+    """
+    Генератор, возвращающий описания транзакций.
+    """
     for transaction in transactions:
         yield transaction["description"]
 
@@ -22,14 +26,12 @@ for _ in range(5):
     print(next(descriptions))
 
 
-def filter_by_currency(
-    transactions: List[dict], currency: str
-) -> Generator[Any, None, None]:
+def filter_by_currency(transactions: List[dict], currency: str) -> Generator[Any, None, None]:
+    """
+    Генератор, возвращающий операции с заданной валютой из списка transactions.
+    """
     for transaction in transactions:
-        if (
-            transaction.get("operationAmount", {}).get("currency", {}).get("code")
-            == currency
-        ):
+        if transaction.get("operationAmount", {}).get("currency", {}).get("code") == currency:
             yield transaction
 
 
@@ -52,11 +54,16 @@ for _ in range(2):
   """
 
 
-def card_number_generator(start: int, end: int) -> Generator[str, None, None]:
+def card_number_generator(start: int, end: int) -> Generator[str, Any, None]:
+    """
+    Генератор номеров банковских карт, который должен генерировать номера карт
+    в формате "XXXX XXXX XXXX XXXX", где X — цифра.
+    Должны быть сгенерированы номера карт в заданном диапазоне
+    """
     for i in range(start, end + 1):
-        yield "{:04d} {:04d} {:04d} {:04d}".format(*(int(d) for d in str(i).zfill(16)))
+        yield "".join([str(randint(start, end)) for _ in range(16)])
 
 
-# Пример использования генератора для номеров карт
-for card_number in card_number_generator(1, 5):
-    print(card_number)
+# Пример использования
+for card_number in card_number_generator(2, 8):
+    print(" ".join([card_number[i : i + 4] for i in range(0, len(card_number), 4)]))
