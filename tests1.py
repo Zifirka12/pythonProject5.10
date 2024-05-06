@@ -1,5 +1,5 @@
 import unittest
-from utils import read_transactions, get_transaction_amount_rub
+from utils import read_transactions, get_transaction_rub
 
 
 class TestUtils(unittest.TestCase):
@@ -18,4 +18,4 @@ class TestUtils(unittest.TestCase):
             ({"amount": 100.0, "currency": "EUR"}, 105.0),  # Примерный курс
         ]
         for transaction, expected_amount in test_cases:
-            self.assertAlmostEqual(get_transaction_amount_rub(transaction), expected_amount, delta=5)
+            self.assertAlmostEqual(get_transaction_rub(transaction), expected_amount, delta=5)
